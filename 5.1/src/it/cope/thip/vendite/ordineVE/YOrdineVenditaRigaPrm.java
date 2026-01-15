@@ -29,6 +29,8 @@ public class YOrdineVenditaRigaPrm extends OrdineVenditaRigaPrm {
 
 	protected String iDescrizioneEtichetta;
 
+	protected boolean iAbilitaCalcoloTotRigheSecConReset = false;
+
 	public YOrdineVenditaRigaPrm() {
 		setIdAzienda(Azienda.getAziendaCorrente());
 	}
@@ -40,6 +42,32 @@ public class YOrdineVenditaRigaPrm extends OrdineVenditaRigaPrm {
 
 	public String getDescrizioneEtichetta() {
 		return iDescrizioneEtichetta;
+	}
+
+	public boolean isAbilitaCalcoloTotRigheSecConReset() {
+		return iAbilitaCalcoloTotRigheSecConReset;
+	}
+
+	public void setAbilitaCalcoloTotRigheSecConReset(boolean iAbilitaCalcoloTotRigheSecConReset) {
+		this.iAbilitaCalcoloTotRigheSecConReset = iAbilitaCalcoloTotRigheSecConReset;
+	}
+
+	@Override
+	public void calcolaPrezzoDaRigheSecondarieConReset(boolean reset) {
+		Articolo articolo = getArticolo();
+		if (articolo != null) {
+			char tipoParte = articolo.getTipoParte();
+			char tipoCalcoloPrezzo = articolo.getTipoCalcPrzKit();
+			if ((tipoParte == ArticoloDatiIdent.KIT_NON_GEST || tipoParte == ArticoloDatiIdent.KIT_GEST)
+					&&
+					tipoCalcoloPrezzo == ArticoloDatiVendita.SUL_PRODOTTO_FINITO
+					&& isAbilitaCalcoloTotRigheSecConReset()) {
+				super.calcolaPrezzoDaRigheSecondarieConReset(reset);
+			}else {
+				return;
+			}
+		}
+		super.calcolaPrezzoDaRigheSecondarieConReset(reset);
 	}
 
 	@Override
@@ -71,18 +99,20 @@ public class YOrdineVenditaRigaPrm extends OrdineVenditaRigaPrm {
 					&&
 					tipoCalcoloPrezzo == ArticoloDatiVendita.DA_COMPONENTI) {
 				recuperaCondizioniVendita(testata);
-				setScontoArticolo1(condVen.getScontoArticolo1());
-				setScontoArticolo2(condVen.getScontoArticolo2());
-				setMaggiorazione(condVen.getMaggiorazione());
-				setSconto(condVen.getSconto());
-				if (condVen.getAzzeraScontiCliFor()){
-					setPrcScontoIntestatario(new BigDecimal("0"));
-					setPrcScontoModalita(new BigDecimal("0"));
-					setScontoModalita(null);
-				}else {
-					setPrcScontoIntestatario(condVen.getPrcScontoIntestatario());
-					setPrcScontoModalita(condVen.getPrcScontoModalita());
-					setScontoModalita(condVen.getScontoModalita());
+				if(!isOnDB()) {
+					setScontoArticolo1(condVen.getScontoArticolo1());
+					setScontoArticolo2(condVen.getScontoArticolo2());
+					setMaggiorazione(condVen.getMaggiorazione());
+					setSconto(condVen.getSconto());
+					if (condVen.getAzzeraScontiCliFor()){
+						setPrcScontoIntestatario(new BigDecimal("0"));
+						setPrcScontoModalita(new BigDecimal("0"));
+						setScontoModalita(null);
+					}else {
+						setPrcScontoIntestatario(condVen.getPrcScontoIntestatario());
+						setPrcScontoModalita(condVen.getPrcScontoModalita());
+						setScontoModalita(condVen.getScontoModalita());
+					}
 				}
 			}else {
 				super.calcolaDatiVendita(testata);
