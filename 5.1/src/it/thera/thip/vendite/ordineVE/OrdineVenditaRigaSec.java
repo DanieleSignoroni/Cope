@@ -346,7 +346,7 @@ public class OrdineVenditaRigaSec extends OrdineVenditaRiga implements RigaConDe
 
 //MG FIX 6754 inizio
       boolean totaliDaRicalcolare = isDaRicalcolare();
-      //72296 Softre -->
+      //72296 Softre >
       DocumentoOrdineRiga rigaPrm = getRigaPrimaria();
 		char tipoParte = rigaPrm.getArticolo().getTipoParte();
 		char tipoCalcoloPrezzo = rigaPrm.getArticolo().getTipoCalcPrzKit();
@@ -359,7 +359,7 @@ public class OrdineVenditaRigaSec extends OrdineVenditaRiga implements RigaConDe
 				((YOrdineVenditaRigaPrm)getRigaPrimaria()).setAbilitaCalcoloTotRigheSecConReset(true);
 			}
 		}
-      //72296 Softre <--
+      //72296 Softre <
       if (totaliDaRicalcolare)
         getRigaPrimaria().calcolaPrezzoDaRigheSecondarieSenzaReset();
 //MG FIX 6754 fine
