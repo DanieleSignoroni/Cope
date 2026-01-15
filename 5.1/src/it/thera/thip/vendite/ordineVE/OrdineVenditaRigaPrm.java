@@ -2309,7 +2309,7 @@ public class OrdineVenditaRigaPrm extends OrdineVenditaRiga implements RigaPrima
       if ( (tipoParte == ArticoloDatiIdent.KIT_NON_GEST ||
             tipoParte == ArticoloDatiIdent.KIT_GEST)
           &&
-          (tipoCalcoloPrezzo == ArticoloDatiVendita.DA_COMPONENTI || (tipoCalcoloPrezzo == ArticoloDatiVendita.SUL_PRODOTTO_FINITO))) {
+          (tipoCalcoloPrezzo == ArticoloDatiVendita.DA_COMPONENTI || (tipoCalcoloPrezzo == ArticoloDatiVendita.SUL_PRODOTTO_FINITO))) { //72269 Softre anche su pf
         //Fix 3929 - fine
         BigDecimal zero = new BigDecimal(0.0);
         BigDecimal prezzoRigaPrimaria = zero;

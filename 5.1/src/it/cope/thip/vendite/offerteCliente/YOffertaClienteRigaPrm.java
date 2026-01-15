@@ -1,48 +1,34 @@
-package it.cope.thip.vendite.ordineVE;
+package it.cope.thip.vendite.offerteCliente;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
-import com.thera.thermfw.persist.*;
-import it.thera.thip.vendite.ordineVE.*;
 import it.thera.thip.base.articolo.Articolo;
 import it.thera.thip.base.articolo.ArticoloDatiIdent;
 import it.thera.thip.base.articolo.ArticoloDatiVendita;
-import it.thera.thip.base.azienda.Azienda;
+import it.thera.thip.vendite.offerteCliente.OffertaCliente;
+import it.thera.thip.vendite.offerteCliente.OffertaClienteRigaPrm;
 
 /**
+ *
+ * <p></p>
+ *
  * <p>
  * Company: Softre Solutions<br>
- * Author: Giovanni Lumini<br>
- * Date: 15/12/2025
+ * Author: Daniele Signoroni<br>
+ * Date: 15/01/2026
  * </p>
  */
 
 /*
  * Revisions:
  * Number   Date        Owner    Description
- * 72254    15/12/2025  GLSOF3   Prima stesura
- * 72296	15/01/2025	DSSOF3	 Gestione prezzi KIT
+ * 72XXX    15/01/2026  DSSOF3   Prima stesura
  */
 
-public class YOrdineVenditaRigaPrm extends OrdineVenditaRigaPrm {
-
-	protected String iDescrizioneEtichetta;
+public class YOffertaClienteRigaPrm extends OffertaClienteRigaPrm {
 
 	protected boolean iAbilitaCalcoloTotRigheSecConReset = false;
-
-	public YOrdineVenditaRigaPrm() {
-		setIdAzienda(Azienda.getAziendaCorrente());
-	}
-
-	public void setDescrizioneEtichetta(String descrizioneEtichetta) {
-		this.iDescrizioneEtichetta = descrizioneEtichetta;
-		setDirty();
-	}
-
-	public String getDescrizioneEtichetta() {
-		return iDescrizioneEtichetta;
-	}
 
 	public boolean isAbilitaCalcoloTotRigheSecConReset() {
 		return iAbilitaCalcoloTotRigheSecConReset;
@@ -89,7 +75,7 @@ public class YOrdineVenditaRigaPrm extends OrdineVenditaRigaPrm {
 	}
 
 	@Override
-	protected void calcolaDatiVendita(OrdineVenditaPO testata) throws SQLException {
+	protected void calcolaDatiVendita(OffertaCliente testata) throws SQLException {
 		//72296
 		Articolo articolo = getArticolo();
 		if (articolo != null) {
@@ -121,7 +107,5 @@ public class YOrdineVenditaRigaPrm extends OrdineVenditaRigaPrm {
 		//72296
 	}
 
-	public void setEqual(Copyable obj) throws CopyException {
-		super.setEqual(obj);
-	}
+
 }
