@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context path="/PERS_PTH" docBase="W:/PthDev/Projects/Panthera_VVV/PERS_PTH/WebContent" swallowOutput="true" workDir="W:/PthDev/works/eclipse/PERS_PTH"> 
+	 <Resources className="org.apache.naming.resources.VirtualDirContext" 
+	 extraResourcePaths="W:/PthDev/Projects/Panthera_VVV/PERS_PTH/x.x/websrc,K:/ThipRil/FIXWEB/PERS_PTH/websrc,K:/Thip/v.r.m/websrcsvil" />
+</Context>

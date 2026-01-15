@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="PrintServerConfiguration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ServerConfiguration"/>
+        <xs:element ref="ClientServerMapping"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ServerConfiguration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Port"/>
+        <xs:element ref="RptRoot"/>
+        <xs:element ref="LogPath"/>
+        <xs:element ref="LogLevel"/>
+        <xs:element ref="MaxLogFolders"/>        
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Port" type="xs:integer"/>
+  <xs:element name="RptRoot">
+      <xs:simpleType>
+          <xs:restriction base="xs:string">
+              <xs:pattern value="[A-Za-z]:\\[^&lt;>:&quot;/\\|?\*]+(\\[^&lt;>:&quot;/\\|?\*]+)*\\?"/>
+          </xs:restriction>
+     </xs:simpleType>
+  </xs:element> 
+  <xs:element name="LogPath" type="xs:string"/>
+  <xs:element name="LogLevel" type="xs:integer"/>
+  <xs:element name="MaxLogFolders" type="xs:integer"/>
+  <xs:element name="ClientServerMapping">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="CSMap"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CSMap">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ClientIp"/>
+        <xs:element ref="ClientDBAlias"/>
+        <xs:element ref="ServerDBAlias"/>
+        <xs:element ref="ServerRptRelativePath"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ClientIp">
+      <xs:simpleType>
+          <xs:restriction base="xs:string">
+              <xs:pattern value=" *((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]) *"/>
+          </xs:restriction>
+     </xs:simpleType>
+  </xs:element>
+  <xs:element name="ClientDBAlias" type="xs:NCName"/>  
+  <xs:element name="ServerDBAlias" type="xs:NCName"/>
+  <xs:element name="ServerRptRelativePath" type="xs:string"/>   
+</xs:schema>

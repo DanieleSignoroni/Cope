@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="THERM-Envelope">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="THERM-Header"/>
+				<xs:sequence>
+					<xs:element ref="THERM-Transaction" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="THERM-Header">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="THERM-Timestamp" type="xs:dateTime"/>
+				<xs:element name="THERM-Version">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="\d\.\d\.\d"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="THERM-SaveTransaction" type="THERM-TransactionBaseType" substitutionGroup="THERM-Transaction"/>
+	<xs:element name="THERM-InsertTransaction" type="THERM-TransactionBaseType" substitutionGroup="THERM-Transaction"/>
+	<xs:element name="THERM-UpdateTransaction" type="THERM-TransactionBaseType" substitutionGroup="THERM-Transaction"/>
+	<xs:element name="THERM-DeleteTransaction" substitutionGroup="THERM-Transaction">
+		<xs:complexType>
+		<xs:complexContent>
+			<xs:restriction base="THERM-TransactionBaseType">
+				<xs:sequence>
+					<xs:element ref="THERM-ObjectId"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="THERM-Transaction" abstract="true"/>
+	<xs:element name="THERM-BusinessObject" abstract="true"/>
+	<xs:element name="THERM-ObjectId" abstract="true"/>
+	<xs:complexType name="THERM-TransactionBaseType">
+		<xs:sequence>
+			<xs:element ref="THERM-BusinessObject"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="THERM-ObjectIdBaseType">
+		<xs:attribute name="class" type="xs:Name" use="required"/>
+	</xs:complexType>
+<!--
+	<xs:complexType name="THERM-EmptyElement"/>
+-->
+</xs:schema>

@@ -1,0 +1,91 @@
+ /* CSS Document  - LogTranformer.css - By LR 2009 - (C) Thera SpA */
+ /* Media: screen                                                  */
+
+ body {
+ 	background-color: Black;
+ 	font-family: monospace;
+ 	color: Lime;
+ 	font-size: 18px;
+ }
+
+ #LogTitle {
+ 	text-transform: capitalize;
+ 	text-align: center;
+ 	border-bottom: thin solid Lime;
+ 	font-size: 16px;
+ 	font-weight: bold;
+ }
+
+ #LogInfo {
+ 	border: thin solid;
+ 	font-size: 14px;
+ }
+
+ #LogInfoContent {
+ 	font-size: 12px;
+ }
+
+ #LogInfoDateTitle {
+ 	font-weight: bold;
+ }
+
+ #LogInfoDate {
+ 	color: Yellow;
+ }
+
+ #LogInfoTimeTitle {
+ 	font-weight: bold;
+ }
+
+ #LogInfoTime {
+ 	color: Yellow;
+ }
+
+ #LogInfoLevelTitle {
+ 	font-weight: bold;
+ }
+
+ #LogInfoLevelNumber  {
+ 	color: Yellow;
+ }
+
+ #LogInfoLevelLabel  {
+ 	color: Yellow;
+ }
+
+ #LogInfoGroupOperationTitle {
+ 	font-weight: bold;
+ }
+
+ #LogInfoGroup {
+ 	color: Yellow;
+ }
+
+ #LogInfoOperation {
+ 	color: Yellow;
+ }
+
+ #LogInfoMessageTitle {
+ 	font-weight: bold;
+ }
+
+ #LogInfoMessage {
+ 	color: White;
+ }
+
+ #LogInfoErrorTitle {
+ 	font-weight: bold;
+ }
+
+ #LogInfoError {
+ 	color: Red;
+ }
+
+ #LogInfoErr {
+ 	color: Red;
+ }
+
+ #About {
+ 	font-size: 8px;
+ 	text-align: right;
+ }

@@ -1,0 +1,24 @@
+<!ENTITY K "&#922;">
+<!ELEMENT THERM-Envelope (THERM-Header, (THERM-Transaction+))>
+<!ELEMENT THERM-Header (THERM-Timestamp, THERM-Version)>
+<!ELEMENT THERM-Timestamp (#PCDATA)>
+<!ELEMENT THERM-Version (#PCDATA)>
+<!--
+<!ELEMENT THERM-Header EMPTY>
+<!ATTLIST THERM-Header
+	timestamp CDATA #REQUIRED
+	version CDATA #REQUIRED
+>
+-->
+<!ELEMENT THERM-Transaction (THERM-BusinessObject | THERM-ObjectId)>
+<!ATTLIST THERM-Transaction
+	type (SAVE | INSERT | UPDATE | DELETE) #REQUIRED
+	id ID #REQUIRED
+>
+<!--
+<!ELEMENT THERM-OID EMPTY>
+<!ATTLIST THERM-OID
+	class NMTOKEN #REQUIRED
+	key NMTOKEN #REQUIRED
+>
+-->

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<!-- Print Server Configuration -->
+<PrintServerConfiguration xsi:noNamespaceSchemaLocation="PrintServerConfig.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">  
+    <ServerConfiguration>        
+        <Port>10131</Port>
+        <RptRoot>W:/PthDev/Projects/Panthera/Cope/5.1/rpt/cr2008</RptRoot>
+        <LogPath>W:/PthDev/works/CRR2008/Cope</LogPath>
+        <LogLevel>0</LogLevel>
+        <MaxLogFolders>10</MaxLogFolders>
+    </ServerConfiguration>
+    <ClientServerMapping>      
+        <CSMap>
+            <ClientIp>127.0.0.1</ClientIp>
+            <ClientDBAlias>COPE</ClientDBAlias>            
+            <ServerDBAlias>COPE</ServerDBAlias>
+            <ServerRptRelativePath></ServerRptRelativePath>
+        </CSMap>                
+    </ClientServerMapping>   
+</PrintServerConfiguration>

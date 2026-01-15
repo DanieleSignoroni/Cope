@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Cope</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>LibFixWeb</name>
+			<type>2</type>
+			<location>K:/ThipRil/FIXWEB/Cope/lib</location>
+		</link>
+		<link>
+			<name>LibThipPers</name>
+			<type>2</type>
+			<location>T:/ThipPers/Cope/5.1/lib</location>
+		</link>
+		<link>
+			<name>RptFixWeb</name>
+			<type>2</type>
+			<location>K:/ThipRil/FIXWEB/Cope/rpt</location>
+		</link>
+		<link>
+			<name>RptThipPers</name>
+			<type>2</type>
+			<location>T:/ThipPers/Cope/5.1/rpt</location>
+		</link>
+	</linkedResources>
+</projectDescription>

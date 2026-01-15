@@ -1,0 +1,15 @@
+##############################################
+# sezione FIX di personalizzazione
+Application:PANTHERA,thipPers,5,1,0
+Description:Applicazione PANTHERA, modulo THIP
+# elenco FIX personalizzate
+
+#----  esempio 
+#----  nnnnn : 		numero di fix
+#----  nnnnn_NAME:  nome del file con prefisso il numero della fix
+#----
+#----  nnnnn: com.thera.thermfw.setup.gui.ApplyFix,thipPers/nnnnn/TDDML/nnnnn_NAME.tddml
+#----  nnnnn: com.thera.thermfw.setup.gui.ApplyFix,thipPers/nnnnn/sql/nnnnn_NAME.sql
+#----  nnnnn: com.thera.thermfw.setup.gui.ApplyFix,thipPers/nnnnn/NODB.SQL
+
+UpdateVRM:5,1,0

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<!-- Configurazione PrintServer -->
+<PrintServerConfiguration xsi:noNamespaceSchemaLocation="PrintServerConfig.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <!-- Dati Generali PrintServer --> 
+    <ServerConfiguration>
+        <!-- Porta d'ascolto-->        
+        <Port>10131</Port>
+        <!-- Folder di base degli RPT su server -->
+        <RptRoot>c:\Panthera</RptRoot>
+        <!-- Folder di base dei logs su server -->
+        <LogPath>logs</LogPath>
+        <!-- Livello di log -->
+        <LogLevel>logs</LogLevel>
+        <!-- Massimo numero di folder di log da storicizzare -->
+        <MaxLogFolders>10</MaxLogFolders>
+    </ServerConfiguration>
+    <!-- Mappa tra i client e il server -->
+    <ClientServerMapping>      
+        <!-- Client #1 -->
+        <CSMap>
+            <!-- IP del client -->
+            <ClientIp>127.0.0.1</ClientIp>
+            <!-- Database ODBC del client -->
+            <ClientDBAlias>PANTH01</ClientDBAlias>
+            <!-- Database ODBC del client su server -->            
+            <ServerDBAlias>PANTH01</ServerDBAlias>
+            <!-- Folder del server degli rpt del client (RptRoot + ...) -->
+            <ServerRptRelativePath>panth01\rpt</ServerRptRelativePath>
+        </CSMap>                
+        <!-- Client #... -->
+    </ClientServerMapping>   
+</PrintServerConfiguration>

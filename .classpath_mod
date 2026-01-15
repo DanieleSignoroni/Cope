@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="lib" path="conf/db/THIP_PLATFORM"/>
+	<classpathentry kind="lib" path="conf/commons"/>
+	<classpathentry kind="src" path="x.x/src"/>
+    <classpathentry kind="lib" path="WebContent/dtd"/>
+    <classpathentry kind="lib" path="WebContent/WEB-INF/classes"/>
+	<classpathentry kind="lib" path="x.x/lib"/>
+	<classpathentry kind="lib" path="x.x/rpt"/>
+	<classpathentry kind="lib" path="LibThipPers" sourcepath="T:/ThipPers/PERS_PTH/x.x/src"/>
+	<classpathentry kind="lib" path="RptThipPers"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DevPortalTools"/>
+	<classpathentry kind="lib" path="LibFixWeb" sourcepath="K:/ThipRil/FIXWEB/PERS_PTH/src"/>
+	<classpathentry kind="lib" path="RptFixWeb"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/TomcatTOMCAT_PORT"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PTH_v.r.m"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MOD_PTH"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/THIP_PLATFORM"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="lib"/>
+</classpath>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    Data Definition Markup Language
+	Linguaggio multidatabase per la definizione della struttura di un database
+	Copyright (C) 2006 Thera S.p.A.
+-->
+
+<!-- Elemento radice del documento -->
+<!ELEMENT TDDML (Platform*, Exclude*, (CreateTable | AlterTable | DropTable | RenameTable | MoveTable | CreateView | DropView | CreateViewExtended | DropViewExtended | CreateIndex | DropIndex | Comment | Grant  | SQL)*)>
+
+<!-- Permette di inserire una qualsiasi istruzione SQL -->
+<!-- Attenzione: poiché alcuni simboli potrebbero creare problemi (minore, maggiore, tag di sostituzione di Therm)
+     si consiglia di racchiudere il testo in un blocco CDATA.
+     Ad esempio:
+     <![CDATA[SELECT * FROM <SCH>CLASSAD WHERE KEY_SEQUENCE > 0]]>
+-->	 
+<!ELEMENT SQL (#PCDATA | Platform | Exclude | Continue)* >
+
+<!-- Elementi base -->
+<!-- Create table -->
+<!ELEMENT CreateTable (Platform*, Exclude*, Column+, PrimaryKey?, Constraint*, Continue?)>
+<!ATTLIST CreateTable
+	schema		CDATA #IMPLIED 
+	name		CDATA #REQUIRED
+	shortname	CDATA #IMPLIED
+	tablespace	CDATA #IMPLIED
+>
+
+<!-- Alter table -->
+<!ELEMENT AlterTable (Platform*, Exclude*, (AddColumn | DropColumn | AlterColumn | AddConstraint | DropConstraint | AddPrimaryKey | DropPrimaryKey)+)>
+<!ATTLIST AlterTable
+	schema	CDATA #IMPLIED 
+	name	CDATA #REQUIRED
+>
+
+<!-- Drop table -->
+<!ELEMENT DropTable (Platform*, Exclude*, Continue?)>
+<!ATTLIST DropTable
+	schema	CDATA #IMPLIED 
+	name	CDATA #REQUIRED
+>
+
+<!-- Rename table -->
+<!-- Cambia il nome di una tabella -->
+<!ELEMENT RenameTable (Platform*, Exclude*, Continue?)>
+<!ATTLIST RenameTable
+	oldschema	CDATA #IMPLIED 
+	oldname		CDATA #REQUIRED
+	newschema   CDATA #IMPLIED 
+	newname		CDATA #REQUIRED
+>
+
+<!-- Move table -->
+<!-- Sposta una tabella in un table space diverso -->
+<!ELEMENT MoveTable (Platform*, Exclude*, Continue?)>
+<!ATTLIST MoveTable
+	schema			CDATA #IMPLIED 
+	name			CDATA #REQUIRED
+	oldtablespace	CDATA #IMPLIED 
+	newtablespace	CDATA #REQUIRED 
+>
+
+<!-- Create View -->
+<!-- Oggi non sappiamo fare niente di meglio se non consentire l'inserimento dell'istruzione SQL -->
+<!-- Comunque predisponiamoci a futuri sviluppi -->
+<!ELEMENT CreateView (Platform*, Exclude*, SQL)>
+<!ATTLIST CreateView
+	schema  CDATA #IMPLIED 
+	name	CDATA #REQUIRED
+>
+
+<!-- Drop View -->
+<!ELEMENT DropView (Platform*, Exclude*, Continue?)>
+<!ATTLIST DropView
+	schema  CDATA #IMPLIED 
+	name	CDATA #REQUIRED
+>
+
+<!-- Create View  Extended-->
+<!-- Inserire lo statement completo per la creazione della vista  -->
+<!-- Lo statement viene registrato in una opportuna tabella e utilizzato per rigenerare le viste -->
+<!ELEMENT CreateViewExtended (SQL*)>
+<!ATTLIST CreateViewExtended
+	schema	CDATA #IMPLIED 
+	name	CDATA #REQUIRED
+>
+
+<!-- Drop View Extended -->
+<!ELEMENT DropViewExtended (Platform*, Exclude*, Continue?)>
+<!ATTLIST DropViewExtended
+	schema	CDATA #IMPLIED 
+	name	CDATA #REQUIRED
+>
+
+<!-- Create index -->
+<!ELEMENT CreateIndex (Platform*, Exclude*, IndexCol+, Continue?)>
+<!ATTLIST CreateIndex 
+	schema		CDATA #IMPLIED 
+	name		CDATA #REQUIRED
+	tabschema	CDATA #IMPLIED 
+	tabname		CDATA #REQUIRED
+	shortname	CDATA #IMPLIED
+	unique      (yes | no) "no"
+>
+
+<!-- Drop index -->
+<!ELEMENT DropIndex (Platform*, Exclude*, Continue?)>
+<!ATTLIST DropIndex
+	schema		CDATA #IMPLIED
+    tabname		CDATA #REQUIRED	 
+	name		CDATA #REQUIRED
+>
+
+<!-- Comment -->
+<!ELEMENT Comment (Platform*, Exclude*, (CommentTable | CommentIndex)+)>
+
+<!-- Grant -->
+<!ELEMENT Grant (Platform*, Exclude*, GrantAlter?, GrantControl?, GrantDelete?, GrantIndex?, GrantInsert?, GrantSelect?, GrantReferences?, GrantUpdate?, GrantTo*, GrantOption? )>
+<!ATTLIST Grant 
+	schema		CDATA #IMPLIED 
+	name		CDATA #REQUIRED
+>
+
+<!-- Elementi contenuti negli elementi base -->
+<!-- AddColumn -->
+<!ELEMENT AddColumn (Platform*, Exclude*, Column+, Continue?)>
+
+<!-- AlterColumn -->
+<!ELEMENT AlterColumn (Platform*, Exclude*, Column+, Continue?)>
+
+<!-- DropColumn -->
+<!ELEMENT DropColumn (Platform*, Exclude*, ColumnRef+, Continue?)>
+
+<!-- AddPrimaryKey -->
+<!ELEMENT AddPrimaryKey (Platform*, Exclude*, PrimaryKey, Continue?)>
+
+<!-- DropPrimaryKey -->
+<!ELEMENT DropPrimaryKey (Platform*, Exclude*, Continue?)>
+
+<!-- AddConstraint -->
+<!ELEMENT AddConstraint (Platform*, Exclude*, Constraint+, Continue?)>
+
+<!-- DropConstraint -->
+<!ELEMENT DropConstraint (Platform*, Exclude*, ConstraintRef+, Continue?)>
+
+<!-- Comment table -->
+<!-- Permette di aggiungere commenti sulla tabella e sulle singole colonne della tabella -->
+<!-- Nel caso non si voglia inserire il commento a livello di tabella æŸ³ufficiente non specificarne il testo -->
+<!ELEMENT CommentTable (Platform*, Exclude*, CommentColumn*)>
+<!ATTLIST CommentTable 
+	schema		CDATA #IMPLIED 
+	name		CDATA #REQUIRED
+	text		CDATA #IMPLIED 
+>
+
+<!-- Comment Column -->
+<!-- Commento su una colonna. Da usare all'interno di CommentTable -->
+<!ELEMENT CommentColumn (Platform*, Exclude*)>
+<!ATTLIST CommentColumn 
+	name		CDATA #REQUIRED
+	text		CDATA #REQUIRED
+>
+
+<!-- Comment Index -->
+<!-- Commento su un indice -->
+<!ELEMENT CommentIndex (Platform*, Exclude*)>
+<!ATTLIST CommentIndex 
+	schema		CDATA #IMPLIED 
+	name		CDATA #REQUIRED
+	text		CDATA #IMPLIED 
+>
+	
+<!-- Elementi interni di servizio (non danno origine ad istruzioni SQL) -->
+<!-- Column -->
+<!ELEMENT Column (Platform*, Exclude*)>
+<!ATTLIST Column 
+	name		CDATA #REQUIRED
+	shortname	CDATA #IMPLIED
+	type		(char | varchar | longvarchar | decimal | numeric | bigint | integer | smallint | float | real | date | time | timestamp | blob | clob) #REQUIRED
+	length		CDATA #IMPLIED
+	scale 		CDATA #IMPLIED
+	nullable	(yes | no) "yes"
+	default		CDATA #IMPLIED
+>
+
+<!-- PrimaryKey -->
+<!ELEMENT PrimaryKey (Platform*, Exclude*, ColumnRef+)>
+<!ATTLIST PrimaryKey
+	name		CDATA #IMPLIED
+>
+
+<!-- Constraint -->
+<!ELEMENT Constraint (Platform*, Exclude*, ColumnRef+)>
+<!ATTLIST Constraint
+    schema		CDATA #IMPLIED 
+	name		CDATA #REQUIRED
+	refschema   CDATA #IMPLIED
+	reftable	CDATA #REQUIRED
+	ondelete	(Restrict | Cascade | NoAction | SetNull) #IMPLIED
+	onupdate    (Restrict | Cascade | NoAction | SetNull) #IMPLIED
+>
+
+<!-- IndexCol -->
+<!ELEMENT IndexCol (Platform*, Exclude*)>
+<!ATTLIST IndexCol
+	name		CDATA #REQUIRED
+	order		(Asc | Desc) "Asc"
+>
+
+<!-- Elementi semplici della grant -->
+<!ELEMENT GrantAlter EMPTY>
+<!ELEMENT GrantControl EMPTY>
+<!ELEMENT GrantDelete EMPTY>
+<!ELEMENT GrantIndex EMPTY>
+<!ELEMENT GrantInsert EMPTY>
+<!ELEMENT GrantSelect EMPTY>
+<!ELEMENT GrantOption EMPTY>
+
+<!ELEMENT GrantReferences (ColumnRef*)>
+<!ELEMENT GrantUpdate (ColumnRef*)>
+<!ELEMENT GrantTo (#PCDATA)>
+
+<!-- Rappresenta un riferimento ad una colonna esistente -->
+<!ELEMENT ColumnRef EMPTY>
+<!ATTLIST ColumnRef
+	name	CDATA #REQUIRED
+>
+
+<!-- Rappresenta un riferimento ad una constraint esistente -->
+<!ELEMENT ConstraintRef EMPTY>
+<!ATTLIST ConstraintRef
+	schema	CDATA #IMPLIED
+	name	CDATA #REQUIRED
+>
+
+<!-- Elementi che permettono di indicare quali piattaforme utilizzare e quali escludere -->
+<!ELEMENT Platform EMPTY>
+<!ATTLIST Platform
+	name (DB2 | DB2-400-Long | DB2-400-Short | SQLServer | Oracle) #REQUIRED
+>
+
+<!ELEMENT Exclude EMPTY>
+<!ATTLIST Exclude
+	name (DB2 | DB2-400-Long | DB2-400-Short | SQLServer | Oracle) #REQUIRED
+>
+
+<!-- Indica di continuare l'esecuzione in caso di errore -->
+<!ELEMENT Continue EMPTY>

@@ -1,0 +1,89 @@
+ /* CSS Document  - LogTranformerPrint.css - By LR 2009 -  */
+ /* Media: printer                                         */
+
+ body {
+ 	background-color: White;
+ 	font-family: monospace;
+ 	color: Black;
+ 	font-size: 18px;
+ }
+
+ #LogTitle {
+ 	text-transform: capitalize;
+ 	text-align: center; 	
+ 	font-size: 16px;
+ 	font-weight: bold;
+ }
+
+ #LogInfo { 	
+ 	font-size: 14px;
+ }
+
+ #LogInfoContent {
+ 	font-size: 12px;
+ }
+
+ #LogInfoDateTitle {
+ 	font-weight: bold;
+ }
+
+ #LogInfoDate {
+ 	color: Black;
+ }
+
+ #LogInfoTimeTitle {
+ 	font-weight: bold;
+ }
+
+ #LogInfoTime {
+ 	color: Black;
+ }
+
+ #LogInfoLevelTitle {
+ 	font-weight: bold;
+ }
+
+ #LogInfoLevelNumber  {
+ 	color: Black;
+ }
+
+ #LogInfoLevelLabel  {
+ 	color: Black;
+ }
+
+ #LogInfoGroupOperationTitle {
+ 	font-weight: bold;
+ }
+
+ #LogInfoGroup {
+ 	color: Black;
+ }
+
+ #LogInfoOperation {
+ 	color: Black;
+ }
+
+ #LogInfoMessageTitle {
+ 	font-weight: bold;
+ }
+
+ #LogInfoMessage {
+ 	color: Black;
+ }
+
+ #LogInfoErrorTitle {
+ 	font-weight: bold;
+ }
+
+ #LogInfoError {
+ 	color: Black;
+ }
+
+ #LogInfoErr {
+ 	color: Black;
+ }
+
+ #About {
+ 	font-size: 8px;
+ 	text-align: right;
+ }

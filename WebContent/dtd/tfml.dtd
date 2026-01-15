@@ -1,0 +1,697 @@
+<!--
+################################################################################
+Sezioni:
+  CONTENITORI
+  BARRE
+  ELEMENTI SEMPLICI
+  ELEMENTI COMPOSTI
+  ELEMENTI CBS
+  ALTRO
+################################################################################
+-->
+
+<!-- Definizione root -->
+<!ELEMENT tfml (form*,menubar*,toolbar*,settingbar*,generator*)>
+
+<!-- ################################################################################ -->
+<!-- INIZIO CONTENITORI -->
+<!-- Definizione form -->
+<!-- Aggiunta di attributo ajaxgrid-->
+<!ELEMENT form (label*|legend*|subform*|textinput*|labelres*|textarea*|checkbox*|radiobutton*|combobox*|listbox*|searchcombobox*|button*|mdvbutton*|customjs*|toolbar?|menubar?|gridform?|multisearchform*|editgrid*|ajaxgrid*|textnlseditgrid*|doublelist*|selectiontable*|tabbed*|tree*|treemenu*|treedetails*|wfpanel*|extension*|formcustomization*|fastgrid*|pulldownbutton*)*>
+<!ATTLIST form
+ name CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ menubar CDATA "yes"
+ toolbar CDATA "yes"
+ submitReset (none | submit | both) #IMPLIED
+ errorList CDATA "yes"
+ inputFont CDATA #IMPLIED
+ servlet CDATA #IMPLIED
+ header CDATA #IMPLIED
+ footer CDATA #IMPLIED
+ locktype (nolock | optimistic | cursorlock) "optimistic"
+ collector CDATA #IMPLIED
+ jsLibraryName CDATA #IMPLIED
+ onLoadPresent (yes | no) "no"
+ webFormModifierClass CDATA #IMPLIED
+ deniedAttributeMode (hideNone | hideAll) "hideNone"
+ OKNewButtForInternalRowForm (yes | no) "no"
+ enableConflict (yes | no) "yes"
+>
+
+<!-- Definizione errorList facoltativo l'inserimento se non inserita in TFML vengono assunti valori di default -->
+<!ELEMENT errorlist EMPTY>
+<!ATTLIST errorlist
+  name CDATA #REQUIRED
+  errorViewName CDATA #IMPLIED
+  rows CDATA #IMPLIED
+  visible (yes | no) "yes"
+  longTextOnJSP (yes | no) "no"
+>
+
+<!-- Definizione gridform -->
+<!ELEMENT gridform (menubar*,toolbar*,settingbar*)*>
+<!ATTLIST gridform
+ classHdr CDATA #IMPLIED
+ type (list | search) "list"
+ menubar CDATA "yes"
+ toolbar CDATA "yes"
+ settingbar CDATA "yes"
+ objectformwidth CDATA #IMPLIED
+ objectformheight CDATA #IMPLIED
+ servlet CDATA #IMPLIED
+ doubleClickAction CDATA #IMPLIED
+ gridStylist CDATA #IMPLIED
+>
+
+<!-- Definizione subform -->
+<!ELEMENT subform EMPTY>
+<!ATTLIST subform
+ name CDATA #REQUIRED
+ classCD CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ formJSPName CDATA #IMPLIED
+>
+
+<!-- Definizione tabbed -->
+<!ELEMENT tabbed (tab+)>
+<!ATTLIST tabbed
+ name CDATA #REQUIRED
+ width CDATA #IMPLIED
+ height CDATA #IMPLIED
+>
+
+<!-- Definizione tab -->
+<!ELEMENT tab (label*|legend*|textinput*|labelres*|textarea*|checkbox*|radiobutton*|combobox*|listbox*|searchcombobox*|button*|pulldownbutton*|customjs*|multisearchform*|subform*|editgrid*|ajaxgrid*|textnlseditgrid*|doublelist|selectiontable*|tabbed*|tree*|treemenu*|treedetails*|wfpanel*|extension*|formcustomization*|mdvbutton*)*>
+<!ATTLIST tab
+ name CDATA #REQUIRED
+ caption CDATA #IMPLIED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+ classHdr CDATA #IMPLIED
+ classAD CDATA #IMPLIED
+ classCD CDATA #IMPLIED
+ classRD CDATA #IMPLIED
+ onClick CDATA #IMPLIED
+>
+<!-- FINE CONTENITORI -->
+
+<!-- ################################################################################ -->
+<!-- INIZIO BARRE -->
+<!-- Definizione menubar associabile a form e gridform -->
+<!ELEMENT menubar (menu*|import?|exclude*|include*)*>
+<!ATTLIST menubar
+ name CDATA #REQUIRED
+ maxWidth CDATA #IMPLIED
+ color CDATA #IMPLIED
+ mouseOverColor CDATA #IMPLIED
+ background CDATA #IMPLIED
+ mouseOverBackground CDATA #IMPLIED
+ borderColor CDATA #IMPLIED
+ separatorColor CDATA #IMPLIED
+ resourceFile CDATA #IMPLIED
+ displayMode (onmouseover | onclick | default) "default"
+ acceleratorTable CDATA #IMPLIED
+>
+
+<!-- Definizione toolbar associabile a form e gridform -->
+<!ELEMENT toolbar (actionItem*|mdvActionItem*|pullDownActionItem*|messageActionItem*|ticklerActionItem*|separator*|import?|exclude*|include*)*>
+<!ATTLIST toolbar
+ name CDATA #REQUIRED
+ width CDATA #REQUIRED
+ height CDATA #REQUIRED
+ color CDATA #IMPLIED
+ background CDATA #IMPLIED
+ imgwidth CDATA ""
+ imgheight CDATA ""
+ resourceFile CDATA #IMPLIED
+ closeButtonPresent (yes | no) "yes"
+ acceleratorTable CDATA #IMPLIED
+>
+
+<!-- Definizione settingbar associabile a gridform -->
+<!ELEMENT settingbar (actionItem*|separator*|import?|exclude*|include*)*>
+<!ATTLIST settingbar
+ name CDATA #REQUIRED
+ width CDATA #REQUIRED
+ height CDATA #REQUIRED
+ imgwidth CDATA ""
+ imgheight CDATA ""
+ color CDATA #IMPLIED
+ background CDATA #IMPLIED
+ resourceFile CDATA #IMPLIED
+ acceleratorTable CDATA #IMPLIED
+>
+
+<!-- Definizione menu associabile a menubar -->
+<!ELEMENT menu (actionItem*,submenu*)*>
+<!ATTLIST menu
+ name CDATA #REQUIRED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+>
+
+<!-- Definizione submenu  associabile a menubar -->
+<!ELEMENT submenu (actionItem*,submenu*)>
+<!ATTLIST submenu
+ name CDATA #IMPLIED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+>
+
+<!-- Definizione import associabile a menubar, toolbar e settingbar -->
+<!ELEMENT import EMPTY>
+<!ATTLIST import
+ file CDATA #REQUIRED
+>
+
+<!-- Definizione exclude associabile a menubar, toolbar, settingbar e editgrid e ajaxgrid -->
+<!ELEMENT exclude EMPTY>
+<!ATTLIST exclude
+ nameList CDATA #REQUIRED
+>
+
+<!-- Definizione include associabile a menubar, toolbar, settingbar e editgrid e ajaxgrid
+     nel caso di editgrid vale solo l'inclusione di actionItem
+ -->
+<!ELEMENT include ((actionItem*|submenu*|menu*|separator*)*)>
+<!ATTLIST include
+ nameList CDATA #REQUIRED
+>
+
+<!-- Definizione actionItem associabile a menubar, toolbar, settingbar e editgrid e ajaxgrid
+     per editgrid valgono solo:
+	 type = url e javascript
+	 target = new
+-->
+<!ELEMENT actionItem EMPTY>
+<!ATTLIST actionItem
+ name CDATA #REQUIRED
+ type (url | action | action_submit | javascript) "action_submit"
+ target (new | same | errorsFrame | infoArea) "new"
+ targetToolbar (yes | no) "no"
+ sensibility (single | multiple | none) "none"
+ disableOnShow (yes | no) "no"
+ enableOnDirty (yes | no) "no"
+ action CDATA #IMPLIED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+ image CDATA #IMPLIED
+ disableimage CDATA #IMPLIED
+ acceleratorKey CDATA #IMPLIED
+>
+<!-- Definizione messageActionItem associabile a toolbar
+     per editgrid valgono solo:
+	 type = url e javascript
+	 target = new
+-->
+<!ELEMENT messageActionItem EMPTY>
+<!ATTLIST messageActionItem
+ name CDATA #REQUIRED
+ type (url | action | action_submit | javascript) "action_submit"
+ target (new | same | errorsFrame | infoArea) "new"
+ targetToolbar (yes | no) "no"
+ sensibility (single | multiple | none) "none"
+ disableOnShow (yes | no) "no"
+ enableOnDirty (yes | no) "no"
+ action CDATA #IMPLIED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+ image CDATA #IMPLIED
+ disableimage CDATA #IMPLIED
+ acceleratorKey CDATA #IMPLIED
+>
+
+<!-- Definizione ticklerActionItem associabile a toolbar -->
+<!ELEMENT ticklerActionItem EMPTY>
+<!ATTLIST ticklerActionItem
+ name CDATA #REQUIRED
+ type (url | action | action_submit | javascript) "action_submit"
+ target (new | same | errorsFrame | infoArea) "new"
+ targetToolbar (yes | no) "no"
+ sensibility (single | multiple | none) "none"
+ disableOnShow (yes | no) "no"
+ enableOnDirty (yes | no) "no"
+ action CDATA #IMPLIED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+ image CDATA #IMPLIED
+ disableimage CDATA #IMPLIED
+ acceleratorKey CDATA #IMPLIED
+>
+
+<!ELEMENT pullDownActionItem (actionItem*)>
+<!ATTLIST pullDownActionItem
+ name CDATA #REQUIRED
+ type (url | action | action_submit | javascript) "action_submit"
+ target (new | same | errorsFrame | infoArea) "new"
+ targetToolbar (yes | no) "no"
+ sensibility (single | multiple | none) "none"
+ disableOnShow (yes | no) "no"
+ enableOnDirty (yes | no) "no"
+ action CDATA #IMPLIED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+ image CDATA #IMPLIED
+ disableimage CDATA #IMPLIED
+ acceleratorKey CDATA #IMPLIED
+>
+
+<!-- Definizione mdvActionItem -->
+<!ELEMENT mdvActionItem EMPTY>
+<!ATTLIST mdvActionItem
+ name CDATA #REQUIRED
+ type (url | action | action_submit | javascript) "action_submit"
+ target (new | same | errorsFrame | infoArea) "new"
+ targetToolbar (yes | no) "no"
+ sensibility (single | multiple | none) "none"
+ disableOnShow (yes | no) "no"
+ enableOnDirty (yes | no) "no"
+ action CDATA #IMPLIED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+ image CDATA #IMPLIED
+ disableimage CDATA #IMPLIED
+ acceleratorKey CDATA #IMPLIED
+>
+
+<!-- Definizione separator associabile a toolbar, settingbar -->
+<!ELEMENT separator EMPTY>
+<!-- FINE BARRE -->
+
+<!-- ################################################################################ -->
+<!-- INIZIO ELEMENTI SEMPLICI -->
+<!-- Definizione label -->
+<!ELEMENT label EMPTY>
+<!ATTLIST label
+ name CDATA #REQUIRED
+ classAD CDATA #IMPLIED
+ classCD CDATA #IMPLIED
+ classRD CDATA #IMPLIED
+ classHdr CDATA #IMPLIED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+>
+
+<!-- Definizione legend da usarsi in associazione al tag fieldset -->
+<!ELEMENT legend EMPTY>
+<!ATTLIST legend
+ name CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ classAD CDATA #IMPLIED
+ classCD CDATA #IMPLIED
+ classRD CDATA #IMPLIED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+>
+
+<!-- Definizione textinput -->
+<!ELEMENT textinput EMPTY>
+<!ATTLIST textinput
+ name CDATA #REQUIRED
+ classAD CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ onFocus CDATA #IMPLIED
+ onBlur CDATA #IMPLIED
+ onChange CDATA #IMPLIED
+ resourceFile CDATA #IMPLIED
+ resourceTooltipID CDATA #IMPLIED
+ showCalendarBtn (yes | no) "no"
+ typified (yes | no) "yes"
+>
+
+<!-- Definizione textarea -->
+<!ELEMENT textarea EMPTY>
+<!ATTLIST textarea
+ name CDATA #REQUIRED
+ classAD CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ onFocus CDATA #IMPLIED
+ onBlur CDATA #IMPLIED
+ onChange CDATA #IMPLIED
+>
+
+<!-- Definizione checkbox -->
+<!ELEMENT checkbox EMPTY>
+<!ATTLIST checkbox
+ name CDATA #REQUIRED
+ classAD CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ onClick CDATA #IMPLIED
+>
+
+<!-- Definizione radiobutton -->
+<!ELEMENT radiobutton EMPTY>
+<!ATTLIST radiobutton
+ name CDATA #REQUIRED
+ classAD CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+>
+
+<!-- Definizione combobox -->
+<!ELEMENT combobox EMPTY>
+<!ATTLIST combobox
+ name CDATA #REQUIRED
+ classAD CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ onChange CDATA #IMPLIED
+>
+
+<!-- Definizione listbox -->
+<!ELEMENT listbox EMPTY>
+<!ATTLIST listbox
+ name CDATA #REQUIRED
+ classAD CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ onChange CDATA #IMPLIED
+>
+
+<!-- Definizione button -->
+<!ELEMENT button EMPTY>
+<!ATTLIST button
+ name CDATA #REQUIRED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+ script CDATA #IMPLIED
+ url CDATA #IMPLIED
+ image CDATA #IMPLIED
+ resourceTooltipID CDATA #IMPLIED
+>
+
+<!-- Definizione pulldownbutton -->
+<!ELEMENT pulldownbutton (pullDownButtonActionItem*)>
+<!ATTLIST pulldownbutton
+ name CDATA #REQUIRED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+ script CDATA #IMPLIED
+ url CDATA #IMPLIED
+ image CDATA #IMPLIED
+ resourceTooltipID CDATA #IMPLIED
+ displayType (text | image | textImage) "image"
+ disableImage CDATA #IMPLIED
+ pullDownPosition (left | right) "right"
+ >
+
+<!ELEMENT pullDownButtonActionItem EMPTY>
+<!ATTLIST pullDownButtonActionItem
+ name CDATA #REQUIRED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+ script CDATA #IMPLIED
+ url CDATA #IMPLIED
+ image CDATA #IMPLIED
+ resourceTooltipID CDATA #IMPLIED
+
+>
+
+<!-- Definizione mdvbutton -->
+<!ELEMENT mdvbutton EMPTY>
+<!ATTLIST mdvbutton
+ name CDATA #REQUIRED
+ resourceFile CDATA #IMPLIED
+ resourceID CDATA #IMPLIED
+ script CDATA #IMPLIED
+ url CDATA #IMPLIED
+ image CDATA #IMPLIED
+ resourceTooltipID CDATA #IMPLIED
+ displayType (text | image | textImage) "image"
+ disableImage CDATA #IMPLIED
+ pullDownPosition (left | right) "right"
+ >
+
+
+<!-- Definizione searchcombobox -->
+<!ELEMENT searchcombobox EMPTY>
+<!ATTLIST searchcombobox
+ name CDATA #REQUIRED
+ classRD CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ getAvailableElements CDATA #IMPLIED
+ displaytype (id | desc | idDesc) "idDesc"
+ editbutton CDATA "no"
+ cols CDATA #IMPLIED
+ onChange CDATA #IMPLIED
+ onEditClick CDATA #IMPLIED
+ editGridActionAdapter CDATA #IMPLIED
+ extraRelatedClassAD CDATA #IMPLIED
+ onSearchBack CDATA #IMPLIED
+>
+
+<!-- Definizione multisearchform -->
+<!ELEMENT multisearchform EMPTY>
+<!ATTLIST multisearchform
+ name CDATA #REQUIRED
+ classRD CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ displaytype CDATA #IMPLIED
+ editbutton CDATA #IMPLIED
+ additionalfields CDATA #IMPLIED
+ extraRelatedClassAD CDATA #IMPLIED
+ idCols CDATA #IMPLIED
+ descCols CDATA #IMPLIED
+ onKeyFocus CDATA #IMPLIED
+ onKeyBlur CDATA #IMPLIED
+ onKeyChange CDATA #IMPLIED
+ onSearchClick CDATA #IMPLIED
+ onSearchBack CDATA #IMPLIED
+ onEditClick CDATA #IMPLIED
+ editGridActionAdapter CDATA #IMPLIED
+ fixedRestrictConditions CDATA #IMPLIED
+ additionalRestrictConditions CDATA #IMPLIED
+ specificDOList CDATA #IMPLIED
+ decodeOnBlur (yes | no) "yes"
+>
+<!-- FINE ELEMENTI SEMPLICI -->
+
+<!-- ################################################################################ -->
+<!-- INIZIO ELEMENTI COMPOSTI -->
+<!-- Definizione doublelist -->
+<!ELEMENT doublelist EMPTY>
+<!ATTLIST doublelist
+ classHdr CDATA #IMPLIED
+ classCD CDATA #REQUIRED
+ visiblerows CDATA #IMPLIED
+ cols CDATA #IMPLIED
+ name CDATA #REQUIRED
+ resourceFile CDATA #IMPLIED
+ leftResourceId CDATA #IMPLIED
+ rightResourceId CDATA #IMPLIED
+ displayClassAD CDATA #IMPLIED
+ onAddAction CDATA #IMPLIED
+ onRemoveAction CDATA #IMPLIED
+ onUpAction CDATA #IMPLIED
+ onDownAction CDATA #IMPLIED
+ onLeftClick CDATA #IMPLIED
+ onLeftChange CDATA #IMPLIED
+ onRightClick CDATA #IMPLIED
+ onRightChange CDATA #IMPLIED
+ getAvailableElements CDATA #IMPLIED
+ orderButtons (yes | no) "yes"
+ modifyButton (yes | no) "no"
+ defaultAction CDATA #IMPLIED
+>
+
+<!-- Definizione editgrid -->
+<!ELEMENT editgrid (column+|rowform?|exclude*|include*)*>
+<!ATTLIST editgrid
+ classCD CDATA #REQUIRED
+ name CDATA #REQUIRED
+ visiblerows CDATA #IMPLIED
+ classHdr CDATA #IMPLIED
+ type (edit | include | panel | independent) "edit"
+ keyRel CDATA #IMPLIED
+ onNew CDATA #IMPLIED
+ onEdit CDATA #IMPLIED
+ onView CDATA #IMPLIED
+ onCopy CDATA #IMPLIED
+ onDel CDATA #IMPLIED
+ servlet CDATA #IMPLIED
+ orderButtons (yes | no) "no"
+ noControlRowKeys (yes | no) "no"
+>
+
+<!-- Fix 2837 BP aggiunto il seguente componente web -->
+<!-- Definizione selectiontable -->
+<!ELEMENT selectiontable (column+)>
+<!ATTLIST selectiontable
+ classHdr CDATA #IMPLIED
+ classCD CDATA #REQUIRED
+ visiblerows CDATA #IMPLIED
+ name CDATA #REQUIRED
+ onEdit CDATA #IMPLIED
+ onSelectAction CDATA #IMPLIED
+ onUpAction CDATA #IMPLIED
+ onDownAction CDATA #IMPLIED
+ getAvailableElements CDATA #IMPLIED
+ orderButtons (yes | no) "yes"
+ modifyButton (yes | no) "no"
+ defaultAction CDATA #IMPLIED
+>
+
+<!-- Definizione column associabile a editgrid, ajaxgrid e a selectiontable-->
+<!-- Fix 17913 aggiunto il proprieta flexibleColumn -->
+<!-- Fix 18481 aggiunto il proprieta isCombo per l'ajaxgrid -->
+<!ELEMENT column EMPTY>
+<!ATTLIST column
+ classAD CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ showCalendarBtn (yes | no) "no"
+ hideAsDefault (yes | no) "no"
+ flexibleColumn (yes | no) "no"
+ isCombo (yes | no) "no" 
+>
+
+<!-- Definizione rowform associabile a editgrid e a ajaxgrid -->
+<!ELEMENT rowform EMPTY>
+<!ATTLIST rowform
+ name CDATA #REQUIRED
+ rowJSP CDATA #IMPLIED
+>
+
+<!-- Definizione tree -->
+<!ELEMENT tree (treenode)+>
+<!ATTLIST tree
+	name CDATA #REQUIRED
+	type (menu | detail) "detail"
+	treeClass CDATA #REQUIRED
+	param CDATA #IMPLIED
+	openDepth CDATA #IMPLIED
+	color CDATA #IMPLIED
+	background CDATA #IMPLIED
+	width CDATA #IMPLIED
+	height CDATA #IMPLIED
+	servlet CDATA #IMPLIED
+	rightDefaultJSP CDATA #IMPLIED
+	headerInternal (yes | no) "no"
+	preloadLevel CDATA #IMPLIED
+	leftWidth CDATA #IMPLIED
+	resizable (yes | no) "yes"
+    keepOpenNodesInReload (yes | no) "no"
+>
+
+<!-- Definizione treenode associabile a tree -->
+<!ELEMENT treenode EMPTY>
+<!ATTLIST treenode
+	classHdr CDATA #REQUIRED
+	classAD CDATA #REQUIRED
+	jsp CDATA #IMPLIED
+	image CDATA #IMPLIED
+	grouping (yes | no) "no"
+	sonCDs CDATA #IMPLIED
+	keyRel CDATA #IMPLIED
+    actionsReloadMenu CDATA #IMPLIED
+    actionsReloadNode CDATA #IMPLIED
+    actionsReloadParentNode CDATA #IMPLIED
+    actionsReloadTree CDATA #IMPLIED
+    defaultAction CDATA #IMPLIED
+>
+<!-- FINE ELEMENTI COMPOSTI -->
+
+<!-- ################################################################################ -->
+<!-- INIZIO ELEMENTI CBS -->
+<!-- Definizione textnlseditgrid -->
+<!ELEMENT textnlseditgrid (nlscolumn+|rowform?)*>
+<!ATTLIST textnlseditgrid
+ classCD CDATA #REQUIRED
+ name CDATA #REQUIRED
+ visiblerows CDATA #IMPLIED
+ classHdr CDATA #IMPLIED
+ columnLangClassAD CDATA "LanguageId"
+ columnLangDescClassAD CDATA "LangRel.Description"
+ type (edit | include ) "edit"
+ onNew CDATA #IMPLIED
+ onEdit CDATA #IMPLIED
+ onView CDATA #IMPLIED
+ onCopy CDATA #IMPLIED
+ onDel CDATA #IMPLIED
+ noControlRowKeys (yes | no) "no"
+>
+
+<!-- Definizione nlscolumn associabile a textnlseditgrid -->
+<!ELEMENT nlscolumn EMPTY>
+<!ATTLIST nlscolumn
+ classAD CDATA #REQUIRED
+ inputClassAD CDATA #IMPLIED
+>
+
+<!-- Definizione wfpanel -->
+<!ELEMENT wfpanel EMPTY>
+<!ATTLIST wfpanel
+ name CDATA #REQUIRED
+ classCD CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ workflow (yes | no ) "yes"
+ realStatus (yes | no ) "no"
+ wfCols CDATA #IMPLIED
+ statusCols CDATA #IMPLIED
+>
+
+<!-- Definizione extension -->
+<!ELEMENT extension EMPTY>
+<!ATTLIST extension
+ name CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ classCD CDATA #REQUIRED
+ cellspacing CDATA #IMPLIED
+>
+<!-- FINE ELEMENTI CBS -->
+
+<!-- ################################################################################ -->
+<!-- INIZIO ALTRO -->
+<!-- Definizione formcustomization -->
+<!ELEMENT formcustomization EMPTY>
+<!ATTLIST formcustomization
+ name CDATA #REQUIRED
+ customizePosition (FORM | START_FORM | END_FORM) "START_FORM"
+ customizeName CDATA #REQUIRED
+>
+<!-- FINE ALTRO -->
+
+<!-- Definizione generator -->
+<!ELEMENT generator EMPTY>
+<!ATTLIST generator
+ type (form | subForm | rowForm | internalRowForm | indipendentRowForm | gridForm | searchGridForm | menuToolbar | batchForm) "form"
+>
+
+
+<!-- Definizione fastgrid -->
+<!ELEMENT fastgrid EMPTY>
+<!ATTLIST fastgrid
+ name CDATA #REQUIRED
+ descriptor CDATA #REQUIRED
+ loaderClass CDATA #IMPLIED
+ objectClass CDATA #IMPLIED
+ controllerClass CDATA #IMPLIED
+ xmlFile CDATA #IMPLIED
+ titleAttribute CDATA #IMPLIED
+ toggleHeader (yes | no ) "no"
+ toggleRows (yes | no ) "no"
+ onEdit CDATA #IMPLIED
+ onExitEditing CDATA #IMPLIED
+ onRemove CDATA #IMPLIED
+ onRecover CDATA #IMPLIED
+ height CDATA #IMPLIED
+ fitToPage (yes | no ) "yes"
+ deniedActions CDATA #IMPLIED
+ modifierClass CDATA #IMPLIED
+>
+
+<!-- Fix 18481 inizio -->
+<!-- Definizione ajaxgrid -->
+<!ELEMENT ajaxgrid (column+|rowform?)*>
+<!ATTLIST ajaxgrid
+ name CDATA #REQUIRED
+ classCD CDATA #REQUIRED
+ classHdr CDATA #IMPLIED
+ visiblerows CDATA #IMPLIED
+ type (dependent | independent) "dependent"
+ editable (yes | no) "yes"
+ controller CDATA #IMPLIED
+ keyRel CDATA #IMPLIED
+ noControlRowKeys (yes | no) "no"
+ orderByClassAD CDATA #IMPLIED
+ orderByWay (A | D) "A"
+ >
+<!-- Fix 18481 fine --> 
+

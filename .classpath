@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="lib" path="conf/db/SQLServer"/>
+	<classpathentry kind="lib" path="conf/commons"/>
+	<classpathentry kind="src" path="5.1/src"/>
+	<classpathentry kind="lib" path="WebContent/dtd"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/classes"/>
+	<classpathentry kind="lib" path="5.1/lib"/>
+	<classpathentry kind="lib" path="5.1/rpt"/>
+	<classpathentry kind="lib" path="LibThipPers" sourcepath="T:/ThipPers/Cope/5.1/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DevPortalTools"/>
+	<classpathentry kind="lib" path="LibFixWeb" sourcepath="K:/ThipRil/FIXWEB/Cope/src"/>
+	<classpathentry kind="lib" path="RptFixWeb"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Tomcat9.0_8086"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PTH_5.1.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SQLServer"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="lib"/>
+</classpath>

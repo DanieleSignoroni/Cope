@@ -1,0 +1,72 @@
+@font-face {
+	font-family: pthFontRobotoMono;
+	src: url(../../../../../fonts/Roboto/ttf/RobotoMono-Regular.ttf);
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: pthFontRobotoMono;
+	src: url(../../../../../fonts/Roboto/ttf/RobotoMono-SemiBold.ttf);
+	font-weight: 700;
+}
+
+pre code.hljs, pre code.hljs * {
+	font-family: pthFontRobotoMono, monospace !important;
+  	line-height: 1.5;
+}
+
+.language-json.hljs, .language-sql.hljs, .language-httprequest.hljs, .language-httpresponse.hljs {
+    white-space: break-spaces;
+    background: var(--form-background);
+    border: 1px solid var(--input-border-disabled);
+    line-height: 15px;
+    border-radius: 4px;
+}
+
+.language-sql.hljs .hljs-keyword {
+	color: var(--azzurroScuro);
+}
+
+.hljs-http-method, .hljs-http-status, .hljs-http-url, .hljs-status-text {
+	font-weight: bold;
+}
+
+.hljs-http-url {
+	color: var(--azzurroScuro);
+}
+
+.hljs-http-status.status-info {
+	color: var(--azzurroScuro);
+}
+
+.hljs-http-status.status-success {
+	color: var(--verdeScuro);
+}
+
+.hljs-http-status.status-redirect {
+	color: var(--gialloScuro);
+}
+
+.hljs-http-status.status-client {
+	color: var(--arancioScuro);
+}
+
+.hljs-http-status.status-server {
+	color: var(--rossoScuro);
+}
+
+.hljs-http-method.method-get {
+	color: var(--azzurroScuro);
+}
+
+.hljs-http-method.method-post {
+	color: var(--verdeScuro);
+}
+
+.hljs-http-method.method-put {
+	color: var(--arancioScuro);
+}
+
+.hljs-http-method.method-delete {
+	color: var(--rossoScuro);
+}

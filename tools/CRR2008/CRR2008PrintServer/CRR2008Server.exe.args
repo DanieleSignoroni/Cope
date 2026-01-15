@@ -1,0 +1,26 @@
+# ============================================================================
+# CRR2008 Server Edition EXTRA-ARGUMENTS
+# ============================================================================ 
+# With this file you can add add extra commandline parameters to start CRR2008 
+# print server.
+#
+# Sintax: 
+# - list of "key=value" rows (like the Java sintax for properties)
+# - "key" is the argument name ("-" and ":" are optional)
+# - "key" must be unique
+# - "value" is value of the argument
+# - Example:
+#      loglevels=0
+#      absomething=bla
+#  This is equivalent to adding to the server the following parameters:
+#      -loglevels:0 -absomething:0
+#
+# To list more arguments with the same name: 
+# - key = special char (%) + unique string + "."=value
+# - Example: 
+#       %1.absomething=bla
+#       %2.absomething=bla
+#       %3.absomething=xxx
+#   This is equivalent to adding to the server the following parameters:
+#       -absomething:bla -absomething:bla -absomething:xxx
+
