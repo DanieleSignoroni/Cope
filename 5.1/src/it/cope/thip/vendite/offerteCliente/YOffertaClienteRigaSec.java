@@ -28,7 +28,7 @@ import it.thera.thip.vendite.offerteCliente.OffertaClienteRigaSec;
 /*
  * Revisions:
  * Number   Date        Owner    Description
- * 72XXX    15/01/2026  DSSOF3   Prima stesura
+ * 72296    15/01/2026  DSSOF3   Prima stesura
  */
 
 public class YOffertaClienteRigaSec extends OffertaClienteRigaSec {

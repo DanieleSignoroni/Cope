@@ -23,7 +23,7 @@ import it.thera.thip.vendite.offerteCliente.OffertaClienteRigaPrm;
 /*
  * Revisions:
  * Number   Date        Owner    Description
- * 72XXX    15/01/2026  DSSOF3   Prima stesura
+ * 72296    15/01/2026  DSSOF3   Prima stesura
  */
 
 public class YOffertaClienteRigaPrm extends OffertaClienteRigaPrm {
@@ -51,6 +51,11 @@ public class YOffertaClienteRigaPrm extends OffertaClienteRigaPrm {
 					super.calcolaPrezzoDaRigheSecondarieConReset(reset);
 				else
 					return;
+			}
+			if ((tipoParte == ArticoloDatiIdent.KIT_NON_GEST || tipoParte == ArticoloDatiIdent.KIT_GEST)
+					&&
+					tipoCalcoloPrezzo == ArticoloDatiVendita.DA_COMPONENTI) {
+				reset = false;
 			}
 		}
 		super.calcolaPrezzoDaRigheSecondarieConReset(reset);
@@ -85,7 +90,7 @@ public class YOffertaClienteRigaPrm extends OffertaClienteRigaPrm {
 					&&
 					tipoCalcoloPrezzo == ArticoloDatiVendita.DA_COMPONENTI) {
 				recuperaCondizioniVendita(testata);
-				if(!isOnDB()) {
+				if(!isOnDB() && condVen != null) {
 					setScontoArticolo1(condVen.getScontoArticolo1());
 					setScontoArticolo2(condVen.getScontoArticolo2());
 					setMaggiorazione(condVen.getMaggiorazione());

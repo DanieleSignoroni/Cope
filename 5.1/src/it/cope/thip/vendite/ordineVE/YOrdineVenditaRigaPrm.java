@@ -66,6 +66,11 @@ public class YOrdineVenditaRigaPrm extends OrdineVenditaRigaPrm {
 				else
 					return;
 			}
+			if ((tipoParte == ArticoloDatiIdent.KIT_NON_GEST || tipoParte == ArticoloDatiIdent.KIT_GEST)
+					&&
+					tipoCalcoloPrezzo == ArticoloDatiVendita.DA_COMPONENTI) {
+				reset = false;
+			}
 		}
 		super.calcolaPrezzoDaRigheSecondarieConReset(reset);
 	}
@@ -99,7 +104,7 @@ public class YOrdineVenditaRigaPrm extends OrdineVenditaRigaPrm {
 					&&
 					tipoCalcoloPrezzo == ArticoloDatiVendita.DA_COMPONENTI) {
 				recuperaCondizioniVendita(testata);
-				if(!isOnDB()) {
+				if(!isOnDB() && condVen != null) {
 					setScontoArticolo1(condVen.getScontoArticolo1());
 					setScontoArticolo2(condVen.getScontoArticolo2());
 					setMaggiorazione(condVen.getMaggiorazione());

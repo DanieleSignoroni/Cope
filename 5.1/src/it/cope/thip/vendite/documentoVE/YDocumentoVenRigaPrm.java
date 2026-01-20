@@ -8,6 +8,7 @@ import it.thera.thip.base.articolo.ArticoloDatiIdent;
 import it.thera.thip.base.articolo.ArticoloDatiVendita;
 import it.thera.thip.vendite.documentoVE.DocumentoVenRigaPrm;
 import it.thera.thip.vendite.documentoVE.DocumentoVendita;
+import it.thera.thip.vendite.generaleVE.CondizioniDiVendita;
 
 /**
  *
@@ -52,6 +53,11 @@ public class YDocumentoVenRigaPrm extends DocumentoVenRigaPrm {
 				else
 					return;
 			}
+			if ((tipoParte == ArticoloDatiIdent.KIT_NON_GEST || tipoParte == ArticoloDatiIdent.KIT_GEST)
+					&&
+					tipoCalcoloPrezzo == ArticoloDatiVendita.DA_COMPONENTI) {
+				reset = false;
+			}
 		}
 		super.calcolaPrezzoDaRigheSecondarieConReset(reset);
 	}
@@ -84,8 +90,8 @@ public class YDocumentoVenRigaPrm extends DocumentoVenRigaPrm {
 			if ((tipoParte == ArticoloDatiIdent.KIT_NON_GEST || tipoParte == ArticoloDatiIdent.KIT_GEST)
 					&&
 					tipoCalcoloPrezzo == ArticoloDatiVendita.DA_COMPONENTI) {
-				recuperaCondizioniVendita(testata);
-				if(!isOnDB()) {
+				CondizioniDiVendita condVen = recuperaCondizioniVendita(testata);
+				if(!isOnDB() && condVen != null) {
 					setScontoArticolo1(condVen.getScontoArticolo1());
 					setScontoArticolo2(condVen.getScontoArticolo2());
 					setMaggiorazione(condVen.getMaggiorazione());
